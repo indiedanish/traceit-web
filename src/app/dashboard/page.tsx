@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Wrapper from "@/components/global/wrapper";
 import { WebsiteCard } from "@/app/dashboard/_components/website-card";
 import { EmptyState } from "@/app/dashboard/_components/empty-state";
+import PageLoader from "@/components/global/page-loader";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { ErrorDisplay } from "@/components/ui/error-display";
 import { fetchUserWebsites, getWebsiteCounterEmbed } from "@/lib/api";
@@ -257,7 +258,7 @@ export default function DashboardPage() {
     }
 
     if (isLoading) {
-        return <LoadingSpinner message="Loading your websites..." />;
+        return <PageLoader  />;
     }
 
     if (error) {

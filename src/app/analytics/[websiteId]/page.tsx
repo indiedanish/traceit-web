@@ -10,6 +10,7 @@ import AnimationContainer from "@/components/global/animation-container";
 import Wrapper from "@/components/global/wrapper";
 import { AnalyticsData } from "@/types/analytics";
 import { fetchAnalytics } from "@/lib/api";
+import PageLoader from "@/components/global/page-loader";
 
 export default function AnalyticsPage() {
     const { websiteId } = useParams();
@@ -42,12 +43,7 @@ export default function AnalyticsPage() {
 
     if (loading) {
         return (
-            <Wrapper className="py-20">
-                <div className="flex flex-col items-center justify-center min-h-[60vh]">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                    <p className="mt-4 text-muted-foreground">Loading analytics...</p>
-                </div>
-            </Wrapper>
+            <PageLoader/>
         );
     }
 
