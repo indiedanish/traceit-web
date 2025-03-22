@@ -8,6 +8,20 @@ import PageViewsChart from "./charts/page-views";
 import DeviceDistributionChart from "./charts/device-distribution"
 import AnalyticsCard from "./analytics-card";
 import PageViewsTable from "./page-views-table";
+import { formatDuration, intervalToDuration } from "date-fns";
+
+// Add this function to format time using date-fns
+const formatTimeOnPage = (seconds: number): string => {
+    if (seconds < 60) {
+        return `${seconds} sec`;
+    }
+
+    const duration = intervalToDuration({ start: 0, end: seconds * 1000 });
+    return formatDuration(duration, {
+        format: seconds >= 3600 ? ['hours', 'minutes'] : ['minutes', 'seconds'],
+        delimiter: ' '
+    });
+};
 
 interface AnalyticsDashboardProps {
     data: AnalyticsData;
@@ -47,7 +61,7 @@ export default function AnalyticsDashboard({ data }: AnalyticsDashboardProps) {
                     <AnalyticsCard
                         icon={<Clock className="h-6 w-6 text-primary" />}
                         title="Avg. Time on Page"
-                        value={`${data.engagement?.avgTimeOnPage || 0} sec`}
+                        value={formatTimeOnPage(data.engagement?.avgTimeOnPage || 0)}
                     />
 
                     <AnalyticsCard
