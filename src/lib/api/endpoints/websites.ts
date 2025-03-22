@@ -91,5 +91,5 @@ export async function getWebsiteCounterEmbed(
 
   const config = userId ? apiClient.withAuth(userId) : {};
 
-  return apiClient.get(url, config);
+  return apiClient.post(url, config);
 }
