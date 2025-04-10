@@ -51,7 +51,7 @@ const Hero = () => {
                     </AnimationContainer>
 
                     <AnimationContainer animation="fadeUp" delay={1}>
-                        <div className="flex flex-col items-start gap-4 py-4">
+                        <div className="flex flex-col items-start gap-4 py-4 opacity-0">
                             <p className="text-sm md:text-base text-muted-foreground">
                                 Powering Analytics for Leading Brands
                             </p>
