@@ -1,12 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { NAV_LINKS } from "@/constants";
 import { useClickOutside } from "@/hooks";
 import { cn } from "@/lib";
 import { useClerk, UserButton } from "@clerk/nextjs";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon, XIcon, Github, HeartHandshake } from "lucide-react";
 import Link from "next/link";
 import { RefObject, useRef, useState } from "react";
 import AnimationContainer from "./global/animation-container";
@@ -72,19 +71,39 @@ const Navbar = () => {
 
                     <div className="hidden lg:flex flex-row flex-1 absolute inset-0 items-center justify-center w-max mx-auto gap-x-2 text-sm text-muted-foreground font-medium">
                         <AnimatePresence>
-                            {NAV_LINKS.map((link, index) => (
-                                <AnimationContainer
-                                    key={index}
-                                    animation="fadeDown"
-                                    delay={0.1 * index}
-                                >
-                                    <div className="relative">
-                                        <Link href={link.link} className="hover:text-foreground transition-all duration-500 hover:bg-accent rounded-md px-4 py-2">
-                                            {link.name}
-                                        </Link>
-                                    </div>
-                                </AnimationContainer>
-                            ))}
+                            <AnimationContainer
+                                animation="fadeDown"
+                                delay={0.1}
+                            >
+                                <div className="relative">
+                                    <Link
+                                        href="https://github.com/indiedanish/traceit/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-foreground transition-all duration-500 hover:bg-accent rounded-md px-4 py-2 flex items-center gap-2"
+                                    >
+                                        <Github size={18} />
+                                        <span>GitHub Repo</span>
+                                    </Link>
+                                </div>
+                            </AnimationContainer>
+
+                            <AnimationContainer
+                                animation="fadeDown"
+                                delay={0.2}
+                            >
+                                <div className="relative">
+                                    <Link
+                                        href="https://indiedanish.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-foreground transition-all duration-500 hover:bg-accent rounded-md px-4 py-2 flex items-center gap-2"
+                                    >
+                                        <HeartHandshake size={18} />
+                                        <span>Who am I</span>
+                                    </Link>
+                                </div>
+                            </AnimationContainer>
                         </AnimatePresence>
                     </div>
 
@@ -171,22 +190,42 @@ const Navbar = () => {
                             exit={{ opacity: 0 }}
                             className="flex rounded-b-xl absolute top-16 bg-neutral-950 inset-x-0 z-50 flex-col items-start justify-start gap-2 w-full px-4 py-8 shadow-xl shadow-neutral-950"
                         >
-                            {NAV_LINKS.map((navItem: any, idx: number) => (
-                                <AnimationContainer
-                                    key={`link=${idx}`}
-                                    animation="fadeRight"
-                                    delay={0.1 * (idx + 1)}
-                                    className="w-full"
+                            <AnimationContainer
+                                key="github-link"
+                                animation="fadeRight"
+                                delay={0.1}
+                                className="w-full"
+                            >
+                                <Link
+                                    href="https://github.com/yourusername/yourrepo"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setOpen(false)}
+                                    className="relative text-neutral-300 hover:bg-neutral-800 w-full px-4 py-2 rounded-lg flex items-center gap-2"
                                 >
-                                    <Link
-                                        href={navItem.link}
-                                        onClick={() => setOpen(false)}
-                                        className="relative text-neutral-300 hover:bg-neutral-800 w-full px-4 py-2 rounded-lg"
-                                    >
-                                        <motion.span>{navItem.name}</motion.span>
-                                    </Link>
-                                </AnimationContainer>
-                            ))}
+                                    <Github size={18} />
+                                    <motion.span>GitHub Repo</motion.span>
+                                </Link>
+                            </AnimationContainer>
+
+                            <AnimationContainer
+                                key="portfolio-link"
+                                animation="fadeRight"
+                                delay={0.2}
+                                className="w-full"
+                            >
+                                <Link
+                                    href="https://indiedanish.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setOpen(false)}
+                                    className="relative text-neutral-300 hover:bg-neutral-800 w-full px-4 py-2 rounded-lg flex items-center gap-2"
+                                >
+                                    <Wave size={18} />
+                                    <motion.span>Who am I</motion.span>
+                                </Link>
+                            </AnimationContainer>
+
                             <AnimationContainer animation="fadeUp" delay={0.5} className="w-full">
                                 {user ? (
                                     <Link href="/dashboard" className="w-full">
